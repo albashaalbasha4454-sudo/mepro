@@ -5,12 +5,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  BookOpen, 
+  Code,
+  Rocket,
   PlusCircle, 
-  Cpu, 
-  Target, 
   Zap, 
-  TrendingUp, 
   Users, 
   MessageSquare, 
   Mail, 
@@ -19,32 +17,20 @@ import {
   Facebook, 
   Send,
   ArrowLeft,
-  Layout,
-  Smartphone,
-  Video,
   Palette,
   BarChart3,
-  Briefcase,
-  Layers,
   Check,
-  Lightbulb,
   PenTool,
   Star,
   Award,
   ShieldCheck,
   Globe,
-  Gift,
   BarChart2,
   Eye,
   Link as LinkIcon,
   Share2,
-  Sparkles,
   Lock,
-  Printer,
-  FileText,
-  CheckSquare,
   Headphones,
-  Truck,
   Laptop,
   Camera,
   Search,
@@ -60,41 +46,47 @@ import { motion } from 'motion/react';
 import { supabase, type UserProfile } from './lib/supabase';
 
 const SectionTitle = ({ children, icon: Icon }: { children: React.ReactNode, icon?: any }) => (
-  <div className="mb-16 flex flex-col items-center text-center space-y-6">
-    <div className="flex items-center justify-center gap-6">
+  <div className="mb-20 flex flex-col items-center text-center space-y-8">
+    <div className="flex items-center justify-center gap-8">
       <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: 64 }}
-        className="h-[1px] bg-gradient-to-r from-transparent to-amber-500/50" 
+        initial={{ width: 0, opacity: 0 }}
+        whileInView={{ width: 80, opacity: 1 }}
+        transition={{ duration: 1, ease: "circOut" }}
+        className="h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-amber-500" 
       />
       {Icon && (
         <motion.div 
           whileHover={{ scale: 1.1, rotate: 5 }}
-          className="p-3.5 bg-amber-500/10 rounded-2xl border border-amber-500/20 shadow-[0_0_30px_rgba(245,158,11,0.15)] backdrop-blur-xl"
+          className="p-4 bg-amber-500/5 rounded-3xl border border-amber-500/20 shadow-[0_0_40px_rgba(245,158,11,0.1)] backdrop-blur-2xl"
         >
-          <Icon className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
+          <Icon className="w-7 h-7 text-amber-500" strokeWidth={1} />
         </motion.div>
       )}
       <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: 64 }}
-        className="h-[1px] bg-gradient-to-l from-transparent to-amber-500/50" 
+        initial={{ width: 0, opacity: 0 }}
+        whileInView={{ width: 80, opacity: 1 }}
+        transition={{ duration: 1, ease: "circOut" }}
+        className="h-[1px] bg-gradient-to-l from-transparent via-amber-500/50 to-amber-500" 
       />
     </div>
-    <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase">
-      {children}
-    </h2>
-    <div className="h-1.5 w-24 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.4)]" />
+    <div className="space-y-4">
+      <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">
+        {children}
+      </h2>
+      <div className="flex justify-center">
+        <div className="h-1 w-12 bg-amber-500 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)]" />
+      </div>
+    </div>
   </div>
 );
 
 const Card = ({ children, className = "", ...props }: { children: React.ReactNode, className?: string, [key: string]: any }) => (
   <motion.div 
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -5 }}
-    className={`bg-brand-card/40 backdrop-blur-2xl p-10 rounded-[2.5rem] border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-amber-500/20 transition-all duration-500 group ${className}`}
+    viewport={{ once: true, margin: "-100px" }}
+    whileHover={{ y: -8 }}
+    className={`bg-[#0A0A0F]/60 backdrop-blur-3xl p-12 rounded-[3rem] border border-white/[0.03] shadow-[0_30px_100px_rgba(0,0,0,0.8)] hover:border-amber-500/10 transition-all duration-700 group ${className}`}
     {...props}
   >
     {children}
@@ -697,20 +689,6 @@ const ShareAndGrowSection = ({ stats, trackShare, userProfile, updateName, topUs
   );
 };
 
-const ServiceItem = ({ title, icon: Icon, colorClass }: { title: string, icon: any, colorClass: string, key?: React.Key }) => (
-  <motion.div 
-    whileHover={{ x: -5, backgroundColor: 'rgba(255,255,255,0.05)' }}
-    className="flex items-center justify-end gap-5 text-right group/item p-4 rounded-2xl transition-all duration-500 border border-transparent hover:border-white/5 cursor-default"
-  >
-    <span className="text-slate-300 text-sm md:text-base font-bold group-hover/item:text-white transition-colors tracking-tight">
-      {title}
-    </span>
-    <div className={`w-12 h-12 rounded-2xl ${colorClass}/10 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-all duration-500 border ${colorClass}/10 group-hover/item:border-white/20 shadow-[0_10px_20px_rgba(0,0,0,0.3)] backdrop-blur-md`}>
-      <Icon className={`w-6 h-6 ${colorClass.replace('bg-', 'text-')}`} strokeWidth={1.5} />
-    </div>
-  </motion.div>
-);
-
 const SocialLink = ({ 
   href, 
   label, 
@@ -826,122 +804,112 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay"></div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 pb-24 space-y-12">
+      <main className="max-w-7xl mx-auto px-4 pb-24 space-y-32">
         
-        {/* Hero Section */}
-        <div className="relative pt-8 pb-16">
+        {/* Hero Section - "من أنا" Focus */}
+        <div className="relative min-h-[95vh] flex flex-col items-center justify-center pt-12">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-10 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
           >
-            <div className="mb-12 relative inline-block w-full max-w-7xl group">
-              {/* Animated Glow Background */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-amber-600/20 via-amber-400/20 to-amber-600/20 rounded-[3rem] blur-3xl opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+            <div className="w-[80%] h-[80%] bg-amber-500/5 rounded-full blur-[160px] animate-pulse" />
+          </motion.div>
+
+          <div className="relative z-10 text-center space-y-16 w-full">
+            {/* Main Visual Anchor */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="relative inline-block group"
+            >
+              <div className="absolute -inset-12 bg-amber-500/10 blur-[120px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               
-              <div className="relative aspect-[4/5] md:aspect-[16/9] rounded-[2.5rem] p-[2px] bg-gradient-to-b from-amber-400/50 via-amber-600/30 to-transparent shadow-[0_0_50px_rgba(245,158,11,0.2)] overflow-hidden">
-                <div className="w-full h-full rounded-[2.4rem] bg-[#050505] flex items-center justify-center overflow-hidden border-[12px] border-[#0a0a0a]">
+              <div className="relative aspect-[4/5] md:aspect-[16/9] w-full max-w-5xl mx-auto rounded-[4rem] p-[1px] bg-gradient-to-b from-amber-500/40 via-white/10 to-transparent shadow-[0_50px_120px_rgba(0,0,0,0.9)] overflow-hidden">
+                <div className="w-full h-full rounded-[3.95rem] bg-[#050505] flex items-center justify-center overflow-hidden border-[20px] border-[#080808]">
                   <motion.img 
-                    initial={{ scale: 1.6, filter: 'blur(20px)', opacity: 0 }}
-                    animate={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
-                    transition={{ 
-                      duration: 2.5, 
-                      ease: [0.22, 1, 0.36, 1],
-                      opacity: { duration: 1.5 }
-                    }}
+                    initial={{ scale: 1.2, filter: 'blur(10px)' }}
+                    animate={{ scale: 1, filter: 'blur(0px)' }}
+                    transition={{ duration: 2, ease: "easeOut" }}
                     src="/IMG_4658.jpg" 
-                    alt="Sooq Alketab Personalities" 
-                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700"
+                    alt="Sooq Alketab" 
+                    className="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-1000"
                     referrerPolicy="no-referrer"
                   />
-                  {/* Glass Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-
-                    {/* Pixel-Perfect Text Overlay */}
-                    <div className="absolute inset-0 flex flex-col items-center text-center pointer-events-none select-none">
-                      {/* 1. الجملة الأولى (22%) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute top-[22%] text-slate-200/80 text-lg md:text-3xl font-black uppercase tracking-[0.3em] drop-shadow-lg"
-                      >
-                        ليست مجرد فكرة...
-                      </motion.div>
-  
-                      {/* 2. العنوان الرئيسي (35% & 50%) */}
-                      <div className="absolute top-[30%] flex flex-col items-center">
+                  
+                  {/* Atmospheric Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+                  
+                  {/* Central "من أنا" Text */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <motion.div
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5, duration: 1.2, ease: "easeOut" }}
+                      className="space-y-6"
+                    >
+                      <h1 className="text-8xl md:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-amber-500/50 tracking-tighter drop-shadow-[0_15px_40px_rgba(0,0,0,0.8)]">
+                        من أنا
+                      </h1>
+                      <div className="flex justify-center">
                         <motion.div 
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 1.0, duration: 0.8 }}
-                          className="text-5xl md:text-7xl font-black text-white/90 tracking-tighter leading-none"
-                        >
-                          بل منظومة
-                        </motion.div>
-  
-                        <motion.div 
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 1.5, duration: 0.8 }}
-                          className="text-5xl md:text-8xl font-black text-amber-500 drop-shadow-[0_0_30px_rgba(245,158,11,0.6)] leading-none mt-2"
-                        >
-                          تتحرك
-                        </motion.div>
+                          initial={{ width: 0 }}
+                          animate={{ width: 160 }}
+                          transition={{ delay: 1.4, duration: 1.2, ease: "circOut" }}
+                          className="h-2 bg-amber-500 rounded-full shadow-[0_0_30px_rgba(245,158,11,1)]" 
+                        />
                       </div>
-  
-                      {/* 3. الجملة السفلية (75%) */}
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2.0, duration: 1 }}
-                        className="absolute bottom-[12%] w-full px-6"
-                      >
-                        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-3 text-sm md:text-2xl font-black uppercase tracking-widest bg-black/20 backdrop-blur-sm py-4 rounded-full max-w-4xl mx-auto border border-white/5 shadow-2xl">
-                          <span className="text-slate-300">من</span>
-                          <span className="text-white border-b-4 border-amber-500 pb-1 px-2">المعرفة</span>
-                          <span className="text-slate-300">إلى</span>
-                          <span className="text-white border-b-4 border-emerald-500 pb-1 px-2">التقنية</span>
-                          <span className="text-slate-300">إلى</span>
-                          <span className="text-white border-b-4 border-amber-500 pb-1 px-2">الأثر الحقيقي</span>
-                        </div>
-                      </motion.div>
-                    </div>
+                    </motion.div>
+                  </div>
                 </div>
               </div>
-            </div>
-            
+            </motion.div>
+
+            {/* Identity Details */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 1.2, duration: 1 }}
+              className="space-y-10"
             >
-              <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-amber-500/50 mb-2 tracking-tight">
-                Sooq Alketab
-              </h1>
-              <p className="text-amber-500 font-black text-xl md:text-2xl mb-6 tracking-[0.2em] uppercase">
-                العمق والثقافة
-              </p>
-              
-              <div className="flex flex-col items-center gap-4 mb-10">
-                <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent rounded-full"></div>
-                <p className="text-amber-500 font-bold tracking-[0.2em] uppercase text-sm md:text-base">
-                  طالب هندسة برمجيات وحواسيب
-                </p>
-                <div className="flex flex-wrap justify-center gap-3 text-white/80 font-medium text-lg">
-                  <span className="px-4 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">صانع حلول رقمية</span>
-                  <span className="text-amber-500/50">•</span>
-                  <span className="px-4 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">مطور منظومات متكاملة</span>
+              <div className="space-y-3">
+                <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight">
+                  Sooq Alketab
+                </h2>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="h-[1px] w-12 bg-amber-500/30" />
+                  <p className="text-amber-500 font-black text-2xl md:text-3xl tracking-[0.4em] uppercase">
+                    العمق والثقافة
+                  </p>
+                  <div className="h-[1px] w-12 bg-amber-500/30" />
                 </div>
-                <p className="text-slate-300 text-lg md:text-2xl max-w-2xl mx-auto leading-relaxed mt-6 text-center font-medium">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-200 to-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                    أجمع بين العقل التقني، والحس الإبداعي، والفهم الإنساني.
+              </div>
+
+              <div className="flex flex-col items-center gap-8">
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="px-10 py-4 rounded-full bg-amber-500/5 border border-amber-500/20 backdrop-blur-3xl shadow-[0_0_50px_rgba(245,158,11,0.1)]"
+                >
+                  <p className="text-amber-500 font-black tracking-[0.1em] text-xl md:text-2xl">
+                    طالب هندسة برمجيات وحواسيب
+                  </p>
+                </motion.div>
+                
+                <div className="flex flex-wrap justify-center gap-6">
+                  <span className="px-8 py-3 rounded-2xl bg-white/[0.02] border border-white/5 text-slate-300 font-bold text-xl hover:bg-white/5 hover:border-white/10 transition-all duration-500">صانع حلول رقمية</span>
+                  <span className="px-8 py-3 rounded-2xl bg-white/[0.02] border border-white/5 text-slate-300 font-bold text-xl hover:bg-white/5 hover:border-white/10 transition-all duration-500">مطور منظومات متكاملة</span>
+                </div>
+
+                <p className="text-slate-300 text-2xl md:text-4xl max-w-4xl mx-auto leading-relaxed mt-12 font-medium italic">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-200 to-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    "أجمع بين العقل التقني، والحس الإبداعي، والفهم الإنساني."
                   </span>
                 </p>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Slogan Section */}
@@ -968,62 +936,57 @@ export default function App() {
         </motion.div>
 
         {/* What I Do Section */}
-        <Card className="relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[100px] -mr-32 -mt-32" />
-          <SectionTitle icon={Briefcase}>ماذا أفعل؟</SectionTitle>
-          <div className="space-y-12 relative z-10">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <p className="text-slate-300 text-xl leading-relaxed font-medium">
-                  أجمع بين <span className="text-white border-b-2 border-amber-500/50">دقة الهندسة</span> و <span className="text-white border-b-2 border-amber-500/50">ذكاء التسويق</span>،
-                  لأحوّل الأفكار إلى مشاريع حقيقية، والمشاريع إلى علامات ناجحة.
+        <section id="what-i-do" className="relative">
+          <SectionTitle icon={Zap}>ماذا أفعل؟</SectionTitle>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <Card className="flex flex-col items-center text-center space-y-8">
+              <div className="w-24 h-24 rounded-full bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_40px_rgba(245,158,11,0.1)]">
+                <Search className="w-10 h-10 text-amber-500" />
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-3xl font-black text-white">التحليل العميق</h3>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  دراسة الاحتياجات بدقة هندسية، وتحويل التحديات إلى فرص تقنية ملموسة.
                 </p>
-                <div className="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-500">
-                  <p className="text-amber-500 font-bold text-lg italic">
-                    "عملي لا يعتمد على الحظ... بل على منهجية واضحة ونتائج قابلة للقياس."
-                  </p>
-                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { title: 'بناء الأنظمة', icon: Laptop },
-                  { title: 'تصميم الهويات', icon: Palette },
-                  { title: 'تصوير احترافي', icon: Camera },
-                  { title: 'إدارة المحتوى', icon: Share2 }
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i}
-                    whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.08)' }}
-                    className="p-6 rounded-2xl bg-white/5 border border-white/5 flex flex-col items-center text-center gap-4 transition-all"
-                  >
-                    <div className="p-3 bg-amber-500/10 rounded-xl">
-                      <item.icon className="w-6 h-6 text-amber-500" />
-                    </div>
-                    <span className="text-white font-bold text-sm uppercase tracking-wider">{item.title}</span>
-                  </motion.div>
-                ))}
+            </Card>
+
+            <Card className="flex flex-col items-center text-center space-y-8 border-amber-500/20 bg-amber-500/[0.02]">
+              <div className="w-24 h-24 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.2)]">
+                <Code className="w-10 h-10 text-amber-500" />
               </div>
-            </div>
-            
-            <div className="pt-12 border-t border-white/5">
-              <h3 className="text-2xl font-black text-white mb-8 text-center uppercase tracking-widest opacity-50">منهجية العمل</h3>
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  { title: 'تحليل عميق', desc: 'فهم دقيق للمتطلبات والجمهور قبل البدء', icon: Search },
-                  { title: 'تنفيذ دقيق', desc: 'جودة عالية في التفاصيل التقنية والبصرية', icon: Zap },
-                  { title: 'تطوير مستمر', desc: 'تحسينات مبنية على البيانات والنتائج', icon: TrendingUp }
-                ].map((item, i) => (
-                  <div key={i} className="relative p-8 rounded-3xl bg-white/5 border border-white/5 hover:border-amber-500/20 transition-all group">
-                    <div className="absolute top-4 right-4 text-4xl font-black text-white/5 group-hover:text-amber-500/10 transition-colors">0{i+1}</div>
-                    <item.icon className="w-10 h-10 text-amber-500 mb-6" />
-                    <h4 className="text-xl font-bold text-white mb-3">{item.title}</h4>
-                    <p className="text-slate-400 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
+              <div className="space-y-4">
+                <h3 className="text-3xl font-black text-white">التنفيذ المتقن</h3>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  بناء أنظمة برمجية قوية، قابلة للتوسع، وتتمتع بتجربة مستخدم استثنائية.
+                </p>
               </div>
-            </div>
+            </Card>
+
+            <Card className="flex flex-col items-center text-center space-y-8">
+              <div className="w-24 h-24 rounded-full bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_40px_rgba(245,158,11,0.1)]">
+                <Rocket className="w-10 h-10 text-amber-500" />
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-3xl font-black text-white">التطوير المستمر</h3>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  مرافقة المشاريع بعد الإطلاق لضمان الأداء الأمثل والتطور الدائم.
+                </p>
+              </div>
+            </Card>
           </div>
-        </Card>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mt-24 p-12 rounded-[3rem] bg-white/[0.02] border border-white/5 text-center"
+          >
+            <p className="text-2xl md:text-3xl text-slate-300 font-medium italic leading-relaxed">
+              "لا أقدم مجرد خدمات، بل أبني <span className="text-amber-500 font-black">شراكات تقنية</span> تهدف للنمو والاستدامة."
+            </p>
+          </motion.div>
+        </section>
 
         {/* Project Lifecycle Section */}
         <Card className="relative overflow-hidden group">
@@ -1104,250 +1067,161 @@ export default function App() {
         </Card>
 
         {/* Ecosystem Section */}
-        <div className="space-y-16">
-          <SectionTitle icon={Layers}>منظومة سوق الكتاب</SectionTitle>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
-            
-            {/* Sooq Alketab (The Mother Page) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative flex flex-col h-full bg-[#080808] border border-white/5 rounded-[3rem] p-10 group hover:shadow-[0_40px_80px_-15px_rgba(217,119,6,0.3)] hover:border-amber-600/40 transition-all duration-700 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-amber-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        <section id="ecosystem" className="space-y-24">
+          <SectionTitle icon={Globe}>المنظومة المتكاملة</SectionTitle>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Sooq Alketab - Mother Page */}
+            <Card className="flex flex-col h-full border-amber-500/10">
+              <div className="relative aspect-video rounded-[2.5rem] overflow-hidden mb-10 group/img">
+                <img 
+                  src="/Images/Sooqalketab.jpg" 
+                  alt="Sooq Alketab" 
+                  className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-transparent to-transparent opacity-60" />
+              </div>
               
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-10 rounded-[2.5rem] overflow-hidden border border-white/10 aspect-[4/5] relative group/img shadow-2xl">
-                  <img src="/Images/Sooqalketab.jpg" alt="Sooq Alketab" className="w-full h-full object-cover object-top transition-transform duration-1000 scale-[1.1] group-hover/img:scale-[1.2]" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60" />
+              <div className="flex-grow space-y-8">
+                <div className="space-y-2">
+                  <h3 className="text-4xl font-black text-white">Sooq Alketab</h3>
+                  <p className="text-amber-500 font-bold tracking-widest uppercase">العمق والثقافة</p>
                 </div>
+                
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  الوجهة الأولى للمعرفة، حيث نجمع بين المحتوى الثقافي الرصين والتجربة الرقمية الحديثة.
+                </p>
 
-                <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                  <div className="flex items-center gap-4">
-                    <BookOpen className="w-10 h-10 text-amber-500" strokeWidth={1.5} />
-                    <h3 className="text-3xl font-black text-white tracking-tight">العمق والثقافة</h3>
-                  </div>
-                  <span className="text-amber-500/60 text-xs font-black tracking-[0.4em] uppercase">Sooq Alketab</span>
-                </div>
-
-                <div className="space-y-8 flex-grow">
-                  <div className="text-center space-y-4">
-                    <p className="text-slate-200 text-lg font-bold leading-relaxed">
-                      بوابتك لعالم النشر وصناعة المحتوى الأدبي.
-                    </p>
-                    <p className="text-slate-400 text-sm leading-relaxed opacity-80">
-                      نرافقك في رحلة تحويل الفكرة إلى كتاب مطبوع، من خلال خدمات تحريرية وتصميمية متكاملة تضمن جودة المحتوى وجاذبية المظهر.
-                    </p>
-                  </div>
-                  
-                  {/* Audience */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الجمهور المستهدف
-                    </h4>
-                    <div className="flex items-center justify-end gap-4 bg-white/5 p-6 rounded-2xl border border-white/5 group-hover:border-amber-500/20 transition-all duration-500">
-                      <span className="text-slate-300 text-sm font-bold text-right leading-relaxed">الكتّاب الطموحون – القرّاء النهمون – المؤسسات الثقافية</span>
-                      <Users className="w-6 h-6 text-amber-500 shrink-0" strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Services */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الخدمات الأساسية
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        { title: 'تطوير الفكرة المحورية', icon: Lightbulb },
-                        { title: 'مراجعة النصوص وتحريرها', icon: FileText },
-                        { title: 'التدقيق اللغوي', icon: CheckSquare },
-                        { title: 'تصميم الغلاف والهوية البصرية', icon: Palette },
-                        { title: 'خدمات الطباعة والنشر', icon: Printer },
-                        { title: 'دعم المؤلفين والكتّاب', icon: Users },
-                        { title: 'التوزيع الرقمي والورقي', icon: Globe },
-                        { title: 'حماية حقوق الملكية', icon: ShieldCheck }
-                      ].map((service, i) => (
-                        <ServiceItem key={i} title={service.title} icon={service.icon} colorClass="bg-amber-500" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="mt-10 pt-8 border-t border-white/5 space-y-4">
-                  {[
-                    { label: 'فيسبوك', icon: Facebook, url: 'https://www.facebook.com/share/15rynPPuqv/?mibextid=wwXIfr' },
-                    { label: 'إنستجرام', icon: Instagram, url: 'https://www.instagram.com/sooq_alketab?igsh=MWFzNDN0aXB5d2U0Mw==' },
-                    { label: 'واتساب', icon: MessageSquare, url: 'https://wa.me/message/F7R7RTGBN4BEP1' }
-                  ].map((link, i) => (
-                    <SocialLink key={i} href={link.url} label={link.label} icon={link.icon} colorClass="amber" />
-                  ))}
+                <div className="space-y-4">
+                  <p className="text-white font-black text-sm uppercase tracking-widest">الخدمات الأساسية:</p>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {['صناعة المحتوى الثقافي', 'إدارة المجتمعات المعرفية', 'التوثيق البصري'].map((s) => (
+                      <li key={s} className="flex items-center gap-3 text-slate-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </motion.div>
+
+              <div className="mt-10 pt-8 border-t border-white/5 flex justify-between items-center">
+                <div className="flex gap-4">
+                  <motion.a whileHover={{ y: -3 }} href="https://www.facebook.com/share/15rynPPuqv/?mibextid=wwXIfr" className="p-3 rounded-2xl bg-white/5 hover:bg-amber-500/20 hover:text-amber-500 transition-all">
+                    <Facebook className="w-6 h-6" />
+                  </motion.a>
+                  <motion.a whileHover={{ y: -3 }} href="https://www.instagram.com/sooq_alketab?igsh=MWFzNDN0aXB5d2U0Mw==" className="p-3 rounded-2xl bg-white/5 hover:bg-amber-500/20 hover:text-amber-500 transition-all">
+                    <Instagram className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <button className="px-6 py-3 rounded-2xl bg-amber-500 text-black font-black hover:bg-amber-400 transition-colors shadow-[0_10px_30px_rgba(245,158,11,0.3)]">
+                  زيارة المنصة
+                </button>
+              </div>
+            </Card>
 
             {/* Sooq Alketab Plus */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="relative flex flex-col h-full bg-[#080808] border border-white/5 rounded-[3rem] p-10 group hover:shadow-[0_40px_80px_-15px_rgba(234,179,8,0.3)] hover:border-yellow-500/40 transition-all duration-700 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-yellow-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <Card className="flex flex-col h-full border-yellow-500/10">
+              <div className="relative aspect-video rounded-[2.5rem] overflow-hidden mb-10 group/img">
+                <img 
+                  src="/Images/plus.jpg" 
+                  alt="Sooq Alketab Plus" 
+                  className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-transparent to-transparent opacity-60" />
+              </div>
               
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-10 rounded-[2.5rem] overflow-hidden border border-white/10 aspect-[4/5] relative group/img shadow-2xl">
-                  <img src="/Images/plus.jpg" alt="Sooq Alketab Plus" className="w-full h-full object-cover object-top transition-transform duration-1000 scale-[1.1] group-hover/img:scale-[1.2]" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60" />
+              <div className="flex-grow space-y-8">
+                <div className="space-y-2">
+                  <h3 className="text-4xl font-black text-white">Sooq Alketab Plus</h3>
+                  <p className="text-yellow-500 font-bold tracking-widest uppercase">الأعمال والاحترافية</p>
                 </div>
+                
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  حلول متكاملة للشركات والمؤسسات، نركز على الهوية البصرية والنمو الاستراتيجي.
+                </p>
 
-                <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                  <div className="flex items-center gap-4">
-                    <PlusCircle className="w-10 h-10 text-yellow-500" strokeWidth={1.5} />
-                    <h3 className="text-3xl font-black text-white tracking-tight">الأعمال والاحتراف</h3>
-                  </div>
-                  <span className="text-yellow-500/60 text-xs font-black tracking-[0.4em] uppercase">Sooq Alketab Plus</span>
-                </div>
-
-                <div className="space-y-8 flex-grow">
-                  <div className="text-center space-y-4">
-                    <p className="text-slate-200 text-lg font-bold leading-relaxed">
-                      هنا نأخذ مشروعك إلى مرحلة الظهور والانتشار.
-                    </p>
-                    <p className="text-slate-400 text-sm leading-relaxed opacity-80">
-                      نصنع محتوى يتحدث بلغة جمهورك، ونبني استراتيجيات تسويقية مبنية على بيانات حقيقية لضمان وصول رسالتك وتحقيق أهدافك.
-                    </p>
-                  </div>
-                  
-                  {/* Audience */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الجمهور المستهدف
-                    </h4>
-                    <div className="flex items-center justify-end gap-4 bg-white/5 p-6 rounded-2xl border border-white/5 group-hover:border-yellow-500/20 transition-all duration-500">
-                      <span className="text-slate-300 text-sm font-bold text-right leading-relaxed">أصحاب المشاريع – المسوقون – الباحثون عن التميز الرقمي</span>
-                      <Users className="w-6 h-6 text-yellow-500 shrink-0" strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Services */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الخدمات الأساسية
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        { title: 'إدارة الصفحات باحترافية', icon: Layout },
-                        { title: 'تصميم المواقع', icon: Smartphone },
-                        { title: 'حملات إعلانية دقيقة', icon: Target },
-                        { title: 'عرض منتجات باحتراف', icon: Eye },
-                        { title: 'تخطيط فرص إعلانية', icon: TrendingUp },
-                        { title: 'صناعة محتوى مرئي إبداعي', icon: Video },
-                        { title: 'استراتيجية محتوى مبنية على البيانات', icon: BarChart2 },
-                        { title: 'تطوير مستمر بعد التسليم', icon: Zap }
-                      ].map((service, i) => (
-                        <ServiceItem key={i} title={service.title} icon={service.icon} colorClass="bg-yellow-500" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="mt-10 pt-8 border-t border-white/5 space-y-4">
-                  {[
-                    { label: 'فيسبوك بلس', icon: Facebook, url: 'https://www.facebook.com/share/1D4H22L7eH/?mibextid=wwXIfr' },
-                    { label: 'إنستجرام بلس', icon: Instagram, url: 'https://www.instagram.com/sooqalketab_plus?igsh=MWQyZ3Iwd3ltbGs1ZQ==' },
-                    { label: 'واتساب بلس', icon: MessageSquare, url: 'https://wa.me/message/LVPNQNYJE3PLD1' }
-                  ].map((link, i) => (
-                    <SocialLink key={i} href={link.url} label={link.label} icon={link.icon} colorClass="yellow" />
-                  ))}
+                <div className="space-y-4">
+                  <p className="text-white font-black text-sm uppercase tracking-widest">الخدمات الأساسية:</p>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {['تصميم الهوية البصرية', 'التسويق الاستراتيجي', 'إدارة المشاريع'].map((s) => (
+                      <li key={s} className="flex items-center gap-3 text-slate-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-yellow-500" />
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Sooq Alketab Technology */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="relative flex flex-col h-full bg-[#080808] border border-white/5 rounded-[3rem] p-10 group hover:shadow-[0_40px_80px_-15px_rgba(16,185,129,0.3)] hover:border-emerald-500/40 transition-all duration-700 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="mt-10 pt-8 border-t border-white/5 flex justify-between items-center">
+                <div className="flex gap-4">
+                  <motion.a whileHover={{ y: -3 }} href="https://www.facebook.com/share/1D4H22L7eH/?mibextid=wwXIfr" className="p-3 rounded-2xl bg-white/5 hover:bg-yellow-500/20 hover:text-yellow-500 transition-all">
+                    <Facebook className="w-6 h-6" />
+                  </motion.a>
+                  <motion.a whileHover={{ y: -3 }} href="https://www.instagram.com/sooqalketab_plus?igsh=MWQyZ3Iwd3ltbGs1ZQ==" className="p-3 rounded-2xl bg-white/5 hover:bg-yellow-500/20 hover:text-yellow-500 transition-all">
+                    <Instagram className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <button className="px-6 py-3 rounded-2xl bg-yellow-500 text-black font-black hover:bg-yellow-400 transition-colors shadow-[0_10px_30px_rgba(234,179,8,0.3)]">
+                  زيارة المنصة
+                </button>
+              </div>
+            </Card>
+
+            {/* Sooq Alketab Tech */}
+            <Card className="flex flex-col h-full border-emerald-500/10">
+              <div className="relative aspect-video rounded-[2.5rem] overflow-hidden mb-10 group/img">
+                <img 
+                  src="/IMG_4564.jpg" 
+                  alt="Sooq Alketab Tech" 
+                  className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-transparent to-transparent opacity-60" />
+              </div>
               
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-10 rounded-[2.5rem] overflow-hidden border border-white/10 aspect-[4/5] relative group/img shadow-2xl">
-                  <img src="/IMG_4564.jpg" alt="Sooq Alketab Tech" className="w-full h-full object-cover object-top transition-transform duration-1000 scale-[1.1] group-hover/img:scale-[1.2]" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60" />
+              <div className="flex-grow space-y-8">
+                <div className="space-y-2">
+                  <h3 className="text-4xl font-black text-white">Sooq Alketab Tech</h3>
+                  <p className="text-emerald-500 font-bold tracking-widest uppercase">التقنية والذكاء</p>
                 </div>
+                
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  مختبرنا التقني لتطوير الأنظمة الذكية والحلول البرمجية المبتكرة.
+                </p>
 
-                <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                  <div className="flex items-center gap-4">
-                    <Cpu className="w-10 h-10 text-emerald-400" strokeWidth={1.5} />
-                    <h3 className="text-3xl font-black text-white tracking-tight">التقنية والحلول الذكية</h3>
-                  </div>
-                  <span className="text-emerald-400/60 text-xs font-black tracking-[0.4em] uppercase">Sooq Alketab Tech</span>
-                </div>
-
-                <div className="space-y-8 flex-grow">
-                  <div className="text-center space-y-4">
-                    <p className="text-slate-200 text-lg font-bold leading-relaxed">
-                      حلول تقنية ذكية لأجهزتك اليومية.
-                    </p>
-                    <p className="text-slate-400 text-sm leading-relaxed opacity-80">
-                      نوفر لك أفضل الملحقات والخدمات التقنية التي تضمن أداءً عالياً وحماية متكاملة لأجهزتك الذكية، مع التركيز على الجودة والموثوقية.
-                    </p>
-                  </div>
-                  
-                  {/* Audience */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الجمهور المستهدف
-                    </h4>
-                    <div className="flex items-center justify-end gap-4 bg-white/5 p-6 rounded-2xl border border-white/5 group-hover:border-emerald-500/20 transition-all duration-500">
-                      <span className="text-slate-300 text-sm font-bold text-right leading-relaxed">مستخدمو الهواتف – عشاق التقنية – الباحثون عن الجودة</span>
-                      <Users className="w-6 h-6 text-emerald-500 shrink-0" strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Services */}
-                  <div className="pt-6 border-t border-white/5">
-                    <h4 className="font-black text-white/40 mb-6 text-right text-xs uppercase tracking-[0.3em]">
-                      الخدمات الأساسية
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        { title: 'شواحن أصلية وسريعة', icon: Zap },
-                        { title: 'سماعات ذات جودة عالية', icon: Headphones },
-                        { title: 'كفرات وحماية متكاملة', icon: ShieldCheck },
-                        { title: 'شحن سريع للمحافظات', icon: Truck },
-                        { title: 'صيانة الأجهزة الذكية', icon: Smartphone },
-                        { title: 'استشارات تقنية متخصصة', icon: MessageSquare },
-                        { title: 'عروض وجوائز أسبوعية', icon: Gift },
-                        { title: 'خصومات دورية وحصرية', icon: Sparkles }
-                      ].map((service, i) => (
-                        <ServiceItem key={i} title={service.title} icon={service.icon} colorClass="bg-emerald-500" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="mt-10 pt-8 border-t border-white/5 space-y-4">
-                  {[
-                    { label: 'فيسبوك تك', icon: Facebook, url: 'https://www.facebook.com/SooqAlketabtechnology' },
-                    { label: 'إنستجرام تك', icon: Instagram, url: 'https://www.instagram.com/sooq_alketab' },
-                    { label: 'واتساب تك', icon: MessageSquare, url: 'https://wa.me/00963940392619' }
-                  ].map((link, i) => (
-                    <SocialLink key={i} href={link.url} label={link.label} icon={link.icon} colorClass="emerald" />
-                  ))}
+                <div className="space-y-4">
+                  <p className="text-white font-black text-sm uppercase tracking-widest">الخدمات الأساسية:</p>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {['تطوير المنظومات', 'حلول الذكاء الاصطناعي', 'الأمن السيبراني'].map((s) => (
+                      <li key={s} className="flex items-center gap-3 text-slate-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </motion.div>
+
+              <div className="mt-10 pt-8 border-t border-white/5 flex justify-between items-center">
+                <div className="flex gap-4">
+                  <motion.a whileHover={{ y: -3 }} href="https://www.facebook.com/share/14t2f782X7/?mibextid=wwXIfr" className="p-3 rounded-2xl bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-500 transition-all">
+                    <Facebook className="w-6 h-6" />
+                  </motion.a>
+                  <motion.a whileHover={{ y: -3 }} href="https://www.instagram.com/sooqalketab_tech?igsh=MXFhNHZ3eG80aXFqMw==" className="p-3 rounded-2xl bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-500 transition-all">
+                    <Instagram className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <button className="px-6 py-3 rounded-2xl bg-emerald-500 text-black font-black hover:bg-emerald-400 transition-colors shadow-[0_10px_30px_rgba(16,185,129,0.3)]">
+                  زيارة المنصة
+                </button>
+              </div>
+            </Card>
           </div>
-        </div>
+        </section>
 
         {/* Stats Section */}
         <div className="space-y-16 py-16 relative">
