@@ -437,7 +437,7 @@ const DecodedText = ({ text, isRevealed }: { text: string, isRevealed: boolean }
   }).join(' ');
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: any;
     
     if (isRevealed) {
       let iteration = 0;
