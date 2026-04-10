@@ -454,7 +454,7 @@ export default function App() {
                       ease: [0.22, 1, 0.36, 1],
                       opacity: { duration: 1.5 }
                     }}
-                    src="/IMG_4658.jpg" 
+                    src="/images/IMG_4658.jpg" 
                     alt="Sooq Alketab Personalities" 
                     className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700"
                     referrerPolicy="no-referrer"
@@ -724,7 +724,7 @@ export default function App() {
             <Card className="flex flex-col h-full border-amber-500/10">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-10 group/img border border-white/10 shadow-2xl">
                 <img 
-                  src="/Images/Sooqalketab.jpg" 
+                  src="/images/Sooqalketab.jpg" 
                   alt="Sooq Alketab" 
                   className="w-full h-full object-cover object-top scale-[1.15] group-hover/img:scale-[1.3] transition-transform duration-1000"
                   referrerPolicy="no-referrer"
@@ -791,7 +791,7 @@ export default function App() {
             <Card className="flex flex-col h-full border-yellow-500/10">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-10 group/img border border-white/10 shadow-2xl">
                 <img 
-                  src="/Images/plus.jpg" 
+                  src="/images/plus.jpg" 
                   alt="Sooq Alketab Plus" 
                   className="w-full h-full object-cover object-top scale-[1.15] group-hover/img:scale-[1.3] transition-transform duration-1000"
                   referrerPolicy="no-referrer"
@@ -858,7 +858,7 @@ export default function App() {
             <Card className="flex flex-col h-full border-emerald-500/10">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-10 group/img border border-white/10 shadow-2xl">
                 <img 
-                  src="/IMG_4564.jpg" 
+                  src="/images/IMG_4564.jpg" 
                   alt="Sooq Alketab Tech" 
                   className="w-full h-full object-cover object-top scale-[1.15] group-hover/img:scale-[1.3] transition-transform duration-1000"
                   referrerPolicy="no-referrer"
