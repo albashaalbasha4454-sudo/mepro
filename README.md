@@ -1,91 +1,71 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 # Mepro - Sooq Alketab
 
-تطبيق واجهة أمامية مبني باستخدام React + TypeScript + Vite، ومجهز للنشر المجاني على Vercel أو Netlify.
+موقع واجهة أمامية احترافي مبني باستخدام React وTypeScript وVite. النسخة الحالية مصممة كموقع ثابت سريع بدون Supabase وبدون عدادات تتبع داخلية.
+
+## الهدف
+
+يعرض الموقع منظومة Sooq Alketab وخدماتها الرقمية والثقافية والتقنية من خلال صفحة تعريفية قابلة للنشر على Netlify أو Vercel.
 
 ## التشغيل المحلي
 
-**المتطلبات:** Node.js 20 أو أحدث.
-
-1. تثبيت الحزم:
+المتطلبات: Node.js 20 أو أحدث.
 
 ```bash
 npm install
-```
-
-2. إنشاء ملف `.env.local` عند الحاجة، ثم إضافة متغيرات Supabase الاختيارية:
-
-```bash
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-```
-
-> إن لم تضف مفاتيح Supabase سيعمل التطبيق بالإحصائيات الافتراضية، لكن التتبع المباشر لن يعمل.
-
-3. تشغيل التطبيق:
-
-```bash
 npm run dev
 ```
 
-4. بناء نسخة الإنتاج:
+## بناء نسخة الإنتاج
 
 ```bash
 npm run build
 ```
 
-5. معاينة نسخة الإنتاج:
+ينتج Vite ملفات النشر داخل مجلد:
+
+```bash
+dist
+```
+
+## معاينة نسخة الإنتاج محلياً
 
 ```bash
 npm run preview
 ```
 
-## النشر المجاني على Vercel
+## النشر على Netlify
 
-1. افتح https://vercel.com/new
-2. اربط حساب GitHub.
-3. اختر المستودع `albashaalbasha4454-sudo/mepro`.
-4. اترك الإعدادات كما هي:
-   - Framework Preset: Vite
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-5. إن كنت تستخدم Supabase، أضف المتغيرات التالية في Environment Variables:
-
-```bash
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
-```
-
-6. اضغط Deploy.
-
-ملف `vercel.json` موجود في المشروع لضبط البناء والتوجيهات.
-
-## النشر المجاني على Netlify
-
-1. افتح https://app.netlify.com/start
+1. افتح Netlify.
 2. اختر Import from Git.
 3. اختر المستودع `albashaalbasha4454-sudo/mepro`.
 4. استخدم الإعدادات التالية:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-5. إن كنت تستخدم Supabase، أضف المتغيرات التالية:
 
 ```bash
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
+Build command: npm run build
+Publish directory: dist
 ```
 
-6. اضغط Deploy.
+5. اضغط Deploy.
 
-ملف `netlify.toml` موجود في المشروع لضبط البناء والتوجيهات.
+لا تحتاج إلى متغيرات Supabase أو قاعدة بيانات لهذه النسخة.
 
-## ملاحظات مهمة
+## النشر على Vercel
 
-- لا ترفع ملف `.env.local` إلى GitHub.
-- المفاتيح التي تبدأ بـ `VITE_` تظهر في كود المتصفح، لذلك استخدم فقط مفاتيح عامة مثل Supabase anon key، ولا تضع مفاتيح سرية خاصة.
-- المشروع مضبوط كـ Single Page Application، لذلك تم إضافة rewrite/redirect حتى تعمل الروابط الداخلية بعد النشر.
+1. افتح Vercel.
+2. اربط حساب GitHub.
+3. اختر المستودع.
+4. اترك Framework Preset على Vite.
+5. تأكد من:
 
-View your app in AI Studio: https://ai.studio/apps/6afe32d8-656f-4e56-9004-6696b2204833
+```bash
+Build Command: npm run build
+Output Directory: dist
+```
+
+## ملاحظات هندسية
+
+- لا توجد حاجة إلى Supabase في النسخة الثابتة.
+- لا توجد عدادات زوار أو تتبع نقرات داخلية.
+- الموقع مناسب للنشر كـ Static Site.
+- يفضل ضغط الصور قبل النشر النهائي لتحسين سرعة التحميل.
+- يفضل إبقاء صفحة الهبوط خفيفة وتقليل الاعتمادات غير المستخدمة.
